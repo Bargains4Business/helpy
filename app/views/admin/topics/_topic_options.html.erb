@@ -65,7 +65,7 @@
   <span class="status btn-group left-col-dropdown">
     <button class="dropdown-toggle ticket-control" data-toggle="dropdown" aria-expanded="false">
       <%= content_tag(:span, style: badge_color_from_topic(@topic), class: "btn status-label-button group-to label label-#{@topic.team_list.present? ? @topic.team_list.first.first.downcase : 'default'}") do %>
-        <%= @topic.team_list.first.try(:upcase) || t(:no_team_assigned, default: 'Assign to group') %>
+        <%= @topic.team_list.first.try(:titleize) || t(:no_team_assigned, default: 'Assign to group') %>
         <%= content_tag(:i, nil, class: 'caret') + ' ' %>
       <% end %>
     </button>
@@ -99,7 +99,7 @@
               font-weight: normal;
               text-transform: uppercase;
             }
-        
+
             .selectize-input .item {
               background-color: #ddd;
               color: #666;

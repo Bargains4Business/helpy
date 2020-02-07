@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require "attachinary/orm/active_record"
+require 'attachinary/orm/active_record'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,8 +25,10 @@ module Helpy
     config.active_job.queue_adapter = :sucker_punch
 
     config.to_prepare do
-      Devise::Mailer.layout "mailer" # email.haml or email.erb
+      Devise::Mailer.layout 'mailer' # email.haml or email.erb
     end
+
+    config.middleware.use 'SetAppVariables'
 
   end
 end
@@ -35,8 +37,8 @@ module Api
   class Application < Rails::Application
     config.middleware.use Rack::Cors do
       allow do
-        origins "*"
-        resource "*", headers: :any, methods: [:get,
+        origins '*'
+        resource '*', headers: :any, methods: [:get,
             :post, :put, :delete, :options]
       end
     end
