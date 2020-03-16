@@ -22,7 +22,9 @@ module Helpy
 
     # We are using active_job and currently the inline backend.  You may change this if
     # you want a more robust solution. The queue is used for emails.
-    config.active_job.queue_adapter = :sucker_punch
+    config.active_job.queue_adapter = :sidekiq
+
+    config.allow_concurrency = true
 
     config.to_prepare do
       Devise::Mailer.layout 'mailer' # email.haml or email.erb

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  require 'sidekiq/web'
 
   root to: "locales#redirect_on_locale"
 
@@ -169,7 +169,7 @@ Rails.application.routes.draw do
       resources :posts
     end
     resources :posts
-    
+
     get '/posts/:id/raw' => 'posts#raw', as: :post_raw
     get '/dashboard' => 'dashboard#index', as: :dashboard
     get '/reports/team' => 'reports#team', as: :team_reports
@@ -189,5 +189,13 @@ Rails.application.routes.draw do
 
   # Mount attachinary
   mount Attachinary::Engine => "/attachinary"
+
+  # Mount Sidekiq Monitoring
+  get '/sidekiq/:locale/users/sign_in' => redirect('/')
+
+  Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
 end

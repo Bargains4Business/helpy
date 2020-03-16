@@ -6,7 +6,8 @@ gem 'rails', '4.2.11.1'
 gem 'pg', '~> 0.20.0'
 gem 'pg_search'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.7'
+# gem 'sass-rails', '~> 5.0.7'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -36,18 +37,29 @@ gem 'jquery-minicolors-rails'
 gem 'summernote-rails'
 gem 'codemirror-rails'
 
+# Caching
+gem 'connection_pool'
+gem 'hiredis'
+gem 'redis', '< 5.0', require: ['redis', 'redis/connection/hiredis']
+gem 'redis-rails'
+
+# Background Jobs
+gem 'sidekiq', '< 6'
+gem 'sinatra', '>= 1.3.0', require: nil
+gem 'with_advisory_lock'
+
 # Ranked model gives the ability to rank articles and categories
 gem 'ranked-model'
 
 # Google Analytics Measurement Protocol
 gem 'staccato'
 
-gem "rails-settings-cached", '~> 0.5.0'
+gem 'rails-settings-cached', '~> 0.5.0'
 gem 'sucker_punch', '~> 2.0'
 
 # Charting
-gem "groupdate"
-gem "chartkick"
+gem 'groupdate'
+gem 'chartkick'
 
 # Auth Gems
 gem 'devise', '<= 5.0.0'
@@ -55,7 +67,7 @@ gem 'devise-i18n'
 gem 'devise-bootstrap-views'
 gem 'devise_invitable'
 gem 'omniauth'
-gem "omniauth-rails_csrf_protection" # TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
+gem 'omniauth-rails_csrf_protection' # TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
@@ -96,7 +108,7 @@ gem 'attachinary'
 
 gem 'carrierwave', '~> 1.3.1'
 gem 'fog-aws'
-gem "jquery-fileupload-rails"
+gem 'jquery-fileupload-rails'
 gem 'mini_magick'
 
 # Bootstrap/UI Gems
@@ -108,7 +120,7 @@ gem 'twitter-bootstrap-rails'
 gem 'twitter-bootstrap-rails-confirm'
 gem 'rdiscount'
 gem 'selectize-rails'
-gem "bootstrap-switch-rails", '3.3.3' # NOTE: IOS style switches broke with 3.3.4
+gem 'bootstrap-switch-rails', '3.3.3' # NOTE: IOS style switches broke with 3.3.4
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-select-rails'
 gem 'gemoji'
@@ -147,9 +159,9 @@ gem 'rails-timeago'
 gem 'faker'
 
 gem 'timecop' #used to populate
-gem "hashid-rails", "~> 1.0"
+gem 'hashid-rails', '~> 1.0'
 gem 'themes_on_rails'
-gem "recaptcha", '< 3', require: "recaptcha/rails" # TODO: Update
+gem 'recaptcha', '< 3', require: 'recaptcha/rails' # TODO: Update
 
 gem 'best_in_place', '~> 3.1'
 
@@ -177,7 +189,7 @@ gem 'roo'
 gem 'ancestry'
 
 group :development do
-  gem "better_errors"
+  gem 'better_errors'
 
   # Check Eager Loading / N+1 query problems
   # gem 'bullet'
@@ -199,7 +211,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'launchy'
-  gem "codeclimate-test-reporter",require: nil
+  gem 'codeclimate-test-reporter',require: nil
   gem 'simplecov', :require => false
 
   # remove this for Rails 5 because the function is already included

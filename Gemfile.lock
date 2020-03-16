@@ -154,6 +154,7 @@ GEM
     config (1.1.1)
       activesupport (>= 3.0)
       deep_merge (~> 1.0.1)
+    connection_pool (2.2.2)
     crass (1.0.5)
     css_parser (1.7.0)
       addressable
@@ -274,6 +275,7 @@ GEM
       hashids (~> 1.0)
     hashids (1.0.5)
     hashie (3.6.0)
+    hiredis (0.6.3)
     hitimes (2.0.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
@@ -445,6 +447,8 @@ GEM
       rack (>= 0.4)
     rack-cors (1.0.6)
       rack (>= 1.6.0)
+    rack-protection (1.5.5)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.11.1)
@@ -493,6 +497,23 @@ GEM
     rdoc (6.2.0)
     recaptcha (2.3.0)
       json
+    redis (4.1.2)
+    redis-actionpack (5.1.0)
+      actionpack (>= 4.0, < 7)
+      redis-rack (>= 1, < 3)
+      redis-store (>= 1.1.0, < 2)
+    redis-activesupport (5.2.0)
+      activesupport (>= 3, < 7)
+      redis-store (>= 1.3, < 2)
+    redis-rack (2.0.5)
+      rack (>= 1.5, < 3)
+      redis-store (>= 1.2, < 2)
+    redis-rails (5.0.2)
+      redis-actionpack (>= 5.0, < 6)
+      redis-activesupport (>= 5.0, < 6)
+      redis-store (>= 1.2, < 2)
+    redis-store (1.6.0)
+      redis (>= 2.2, < 5)
     regexp_parser (0.5.0)
     request_store (1.4.1)
       rack (>= 1.4)
@@ -520,14 +541,14 @@ GEM
     ruby-progressbar (1.10.1)
     rubyzip (1.3.0)
     sass (3.4.25)
-    sass-rails (5.0.7)
-      railties (>= 4.0.0, < 6)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
     sassc (2.2.1)
       ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     scout_apm (2.6.4)
       parser
     scss-lint (0.38.0)
@@ -545,6 +566,11 @@ GEM
     shoulda-context (1.2.2)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    sidekiq (5.2.7)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack (>= 1.5.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     simple_form (3.5.1)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -553,6 +579,10 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sinatra (1.4.8)
+      rack (~> 1.5)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     spring (2.0.2)
       activesupport (>= 4.2)
     sprockets (3.7.2)
@@ -607,6 +637,8 @@ GEM
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
+    with_advisory_lock (4.0.0)
+      activerecord (>= 4.2)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -641,6 +673,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   codemirror-rails
   config (~> 1.1.0)
+  connection_pool
   daemons
   devise (<= 5.0.0)
   devise-bootstrap-views
@@ -672,6 +705,7 @@ DEPENDENCIES
   hashid-rails (~> 1.0)
   helpy_imap!
   helpy_onboarding!
+  hiredis
   http_accept_language
   i18n-country-translations
   inky-rb
@@ -713,10 +747,12 @@ DEPENDENCIES
   rb-readline
   rdiscount
   recaptcha (< 3)
+  redis (< 5.0)
+  redis-rails
   roo
   route_translator
   rubocop
-  sass-rails (~> 5.0.7)
+  sassc-rails
   scout_apm
   scss-lint
   sdoc (~> 1.0.0)
@@ -724,8 +760,10 @@ DEPENDENCIES
   selenium-webdriver
   shoulda (= 3.5)
   shoulda-matchers (~> 2.0)
+  sidekiq (< 6)
   simple_form
   simplecov
+  sinatra (>= 1.3.0)
   spring (~> 2.0.2)
   staccato
   sucker_punch (~> 2.0)
@@ -739,6 +777,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   web-console (~> 3.3)
+  with_advisory_lock
 
 RUBY VERSION
    ruby 2.4.1p111

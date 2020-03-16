@@ -56,6 +56,8 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :inline
 
+  config.sass.inline_source_maps = true
+
   config.after_initialize do
     # Bullet Configuration / https://github.com/flyerhzm/bullet
     # Bullet.enable = true

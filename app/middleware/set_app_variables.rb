@@ -46,4 +46,8 @@ class SetAppVariables
   def to_boolean(str)
     str == 'true'
   end
+
+  def logger
+    Rails.logger
+  end
 end

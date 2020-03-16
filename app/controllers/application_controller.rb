@@ -93,6 +93,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :display_branding?
 
+  def hide_admin_footer?
+    AppSettings['settings.hide_admin_footer'] == "1" || AppSettings['settings.hide_admin_footer'] == true
+  end
+  helper_method :hide_admin_footer?
+
+  def hide_app_footer?
+    AppSettings['settings.hide_app_footer'] == "1" || AppSettings['settings.hide_app_footer'] == true
+  end
+  helper_method :hide_app_footer?
+
   def forums_enabled?
     redirect_to root_path unless forums?
   end
